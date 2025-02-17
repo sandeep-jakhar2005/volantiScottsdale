@@ -118,7 +118,6 @@ class ProductsCategoriesProxyController extends Controller
                 }
 
                 $getCategorydetail = $this->getCategorydetail($combinedIds);
-              
 
                 return view($this->_config['category_view'], compact('category', 'childCategory', 'getCategorydetail'));
 

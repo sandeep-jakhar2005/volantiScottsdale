@@ -193,7 +193,6 @@ class ProductRepository extends Repository
      */
     public function getAll($categoryId = null)
     {
-        
         if (core()->getConfigData('catalog.products.storefront.search_mode') == 'elastic') {
             return $this->searchFromElastic($categoryId);
           
@@ -211,6 +210,7 @@ class ProductRepository extends Repository
      */
     public function searchFromDatabase($categoryId)
     {
+        
         $params = array_merge([
             'status'
             => 1,
@@ -271,6 +271,7 @@ class ProductRepository extends Repository
              * Retrieve all the filterable attributes.
              */
             $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys($params));
+
             /**
              * Filter the required attributes.
              */
@@ -378,7 +379,7 @@ class ProductRepository extends Repository
             } else {
                 return $qb->inRandomOrder();
             }
-
+            $qb->whereNotNull('pc.category_id');
             return $qb->groupBy('products.id');
         });
 

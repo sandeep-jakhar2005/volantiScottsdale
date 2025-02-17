@@ -219,6 +219,7 @@ null,
 
                 @php
                 $products = collect($getCategorydetail['products']);
+
                 $categories = collect($getCategorydetail['product_category']);
                 $desiredCategoryId = $category->id; // Keep as object property access
             

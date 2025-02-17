@@ -73,7 +73,7 @@ Customization Services | Volanti Jet Catering
                 <div class="form-group">
                     <label for="file">Upload File</label>
                     <div class="file_upload_div">
-                    <input type="file" class="form-control-file file-field @error('uploadfile.*') is-invalid @enderror" id="uploadfile" accept=".pdf, .xls, .xlsx, .doc, .docx" name="uploadfile[]" multiple required hidden>
+                    <input type="file" class="form-control-file file-field @error('uploadfile.*') is-invalid @enderror" id="uploadfile" accept=".pdf, .xls, .xlsx, .doc, .docx" name="uploadfile[]" multiple required style="display: none">
                     <label class="file__input--label d-flex w-50" for="uploadfile">
                         <span class="label-text w-100 add_file_text d-flex mt-1 pl-2">Add file:</span>
                         <span class="upload-btn ml-auto upload_file_text d-flex align-items-center justify-content-center mt-1">Upload</span>
@@ -116,7 +116,7 @@ Customization Services | Volanti Jet Catering
     <script>
         $(document).ready(function() {
     
-         $('.sendbutton').prop('disabled',true);
+        $('.sendbutton').prop('disabled',true);
             // sandeep || add validation code 
             jQuery("body").on('click', '.sendbutton', function(e) {
                 e.preventDefault();
@@ -126,8 +126,9 @@ Customization Services | Volanti Jet Catering
                     email = $('.email-field').val(),
                     phoneNumber = $('.phone-field').val(),
                     message = $('.message-field').val(),
-                    file = $('.file-field').val(),
+                    file = $('#uploadfile').val(),
                     hasError = false;
+
 
                     $('.form-control').removeClass('is-invalid');
                     $('.invalid-feedback, .fname-error, .lname-error, .email-error, .phone-error, .message-error, .file-error, #fileError').empty();
@@ -286,154 +287,88 @@ Customization Services | Volanti Jet Catering
     $(this).closest('form').find('button[type="submit"]').prop('disabled', !isValid);
 });
 
+let selectedFiles = [];
+$('body').on('change', '#uploadfile', function() {
+    $('.file-error').empty();
+    var newFiles = $(this)[0].files;
+    $('#fileError').hide().text('');
 
+    var fileContainer = $('.file_upload_div');
 
+    // Check if total files will exceed limit
+    if (selectedFiles.length + newFiles.length > 5) {
+        $('#fileError').text('Maximum 5 files can be uploaded.').show();
+        return;
+    }
 
-            //  let selectedFiles = [];
-        
-            // // sandeep || file upload validation code
-            // $('body').on('change', '#uploadfile', function() {
-            //     $('.file-error').empty();
-            //     var files = $(this)[0].files;
-            //     console.log(files)
-            //     $('#fileError').hide().text('');
+    const dataTransfer = new DataTransfer();
 
-            //     var fileContainer = $('.file_upload_div'); // Target the container to append file details
-            //     // Clear any previous file details
-            //     fileContainer.find('.file__value').remove();
+    // Add already selected files to DataTransfer
+    selectedFiles.forEach(file => dataTransfer.items.add(file));
 
+    for (var i = 0; i < newFiles.length; i++) {
+        var file = newFiles[i];
 
-            //     for (var i = 0; i < files.length; i++) {
-            //         var file = files[i];
+        // File size validation
+        if (file.size > 2000 * 1024) {
+            $('#fileError').text('Maximum file size allowed is 2 MB.').show();
+            return;
+        }
 
-            //         if (files.length > 5) {
-            //             $('#fileError').text('Maximum 5 files can be uploaded.').show();
-            //             $(this).val('');
-            //             return;
-            //         }
+        // File type validation
+        var fileType = file.type;
+        if (!(fileType === "application/pdf" ||
+              fileType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
+              fileType === "application/vnd.ms-excel" ||
+              fileType === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )) {
+            $('#fileError').text('Only upload PDF, DOCX, and XLS files.').show();
+            return;
+        }
 
-            //         if (file.size > 2000 * 1024) {
-            //             $('#fileError').text('Maximum file size allowed is 2 MB.').show();
-            //             $(this).val('');
-            //             return;
-            //         }
+        // Duplicate file check
+        if (selectedFiles.some(existingFile => existingFile.name === file.name)) {
+            $('#fileError').text('File with same name already exists.').show();
+            return;
+        }
 
-            //         var fileType = file.type;
-            //         console.log(fileType)
-            //         if (!(fileType === "application/pdf" ||
-            //                 fileType ===
-            //                 "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
-            //                 fileType === "application/vnd.ms-excel" ||
-            //                 fileType === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            //             )) {
-            //             $('#fileError').text('Only upload PDF, DOCX, and XLS files.').show();
-            //             $(this).val('');
-            //             return;
-            //         }
+        // Add file to arrays and DataTransfer
+        selectedFiles.push(file);
+        dataTransfer.items.add(file);
 
+        var fileHtml = `
+            <div class='file__value d-flex justify-content-between align-items-center mt-2'>
+                <div class='file__value--text'>${file.name}</div>
+                <div class='file__value_remove text-danger pr-3' data-id='${file.name}' style='cursor: pointer;'>Remove</div>
+            </div>
+        `;
+        fileContainer.append(fileHtml);
+    }
 
-            //         // Add file to the selectedFiles array
-            //             selectedFiles.push(file);
+    // Update input files
+    $('#uploadfile')[0].files = dataTransfer.files;
+});
 
-            //         var fileHtml = `
-            //         <div class='file__value d-flex justify-content-between align-items-center mt-2'>
-            //             <div class='file__value--text'>${file.name}</div>
-            //             <div class='file__value_remove text-danger pr-3' data-id='${file.name}' style='cursor: pointer;'>Remove</div>
-            //         </div>
-            //     `;
-            //     fileContainer.append(fileHtml);
+// File remove functionality
+$('body').on('click', '.file__value_remove', function() {
+    const fileName = $(this).data('id');
 
-            //     }
+    // Remove file from selectedFiles
+    selectedFiles = selectedFiles.filter(file => file.name !== fileName);
+    $(this).closest('.file__value').remove();
 
-            //     $('#fileError').hide();
-            //      $(this).val('');
+    // Update input with remaining files
+    const dataTransfer = new DataTransfer();
+    selectedFiles.forEach(file => dataTransfer.items.add(file));
+    $('#uploadfile')[0].files = dataTransfer.files;
 
-            // });
+    if (selectedFiles.length === 0) {
+        $('#fileError').text('Please upload at least one file.').show();
+    } else {
+        $('#fileError').hide();
+    }
+});
 
-
-            // sandeep || file upload validation code
-            let selectedFiles = [];
-
-            $('body').on('change', '#uploadfile', function() {
-                $('.file-error').empty();
-                var newFiles = $(this)[0].files;
-                $('#fileError').hide().text('');
-
-                var fileContainer = $('.file_upload_div');
-                
-                // Check if total files (existing + new) will exceed limit
-                if (selectedFiles.length + newFiles.length > 5) {
-                    $('#fileError').text('Maximum 5 files can be uploaded.').show();
-                    $(this).val('');
-                    return;
-                }
-
-                for (var i = 0; i < newFiles.length; i++) {
-                    var file = newFiles[i];
-
-                    if (file.size > 2000 * 1024) {
-                        $('#fileError').text('Maximum file size allowed is 2 MB.').show();
-                        $(this).val('');
-                        return;
-                    }
-
-                    var fileType = file.type;
-                    if (!(fileType === "application/pdf" ||
-                            fileType === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" ||
-                            fileType === "application/vnd.ms-excel" ||
-                            fileType === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                        )) {
-                        $('#fileError').text('Only upload PDF, DOCX, and XLS files.').show();
-                        $(this).val('');
-                        return;
-                    }
-
-                    // Check if file with same name already exists
-                    if(selectedFiles.some(existingFile => existingFile.name === file.name)) {
-                        $('#fileError').text('File with same name already exists.').show();
-                        $(this).val('');
-                        return;
-                    }
-
-                    // Add new file to selectedFiles array
-                    selectedFiles.push(file);
-
-                    var fileHtml = `
-                        <div class='file__value d-flex justify-content-between align-items-center mt-2'>
-                            <div class='file__value--text'>${file.name}</div>
-                            <div class='file__value_remove text-danger pr-3' data-id='${file.name}' style='cursor: pointer;'>Remove</div>
-                        </div>
-                    `;
-                    fileContainer.append(fileHtml);
-                }
-
-                $('#fileError').hide();
-                $(this).val(''); // Reset file input for next selection
-
-            });
-
-
-
-        $('body').on('click', '.file__value_remove', function() {
-            const fileName = $(this).data('id');
-            
-            // Remove from selectedFiles array
-            selectedFiles = selectedFiles.filter(file => file.name !== fileName);
-            $(this).closest('.file__value').remove();
-            
-            // Update input files using DataTransfer
-            const dataTransfer = new DataTransfer();
-            selectedFiles.forEach(file => dataTransfer.items.add(file));
-            $('#uploadfile')[0].files = dataTransfer.files;
-            
-            // Show error if no files remain
-            if(selectedFiles.length === 0) {
-                $('#fileError').text('Please upload at least one file.').show();
-            } else {
-                $('#fileError').hide();
-            }
-        });
- });
 
             </script>
 
