@@ -371,7 +371,6 @@ $('body').on('click', '.file__value_remove', function() {
 
 });
 
-
 </script>
 
 @endpush

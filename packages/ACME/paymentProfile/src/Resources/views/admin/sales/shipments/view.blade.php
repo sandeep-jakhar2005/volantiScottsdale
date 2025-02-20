@@ -891,6 +891,7 @@
                 formData.append('order_id', $('#order_id').val());
                 formData.append('_token', $('meta[name="csrf-token"]').attr(
                     'content')); // Get CSRF token from meta tag
+console.log('formdata',['form data',formData]);
 
                 // AJAX request
                 $.ajax({
