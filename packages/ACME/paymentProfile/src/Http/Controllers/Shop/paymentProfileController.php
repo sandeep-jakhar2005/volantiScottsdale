@@ -17,6 +17,7 @@ use Dompdf\Dompdf;
 use Dompdf\Options;
 use Webkul\Sales\Models\OrderItem;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\Debugbar\Facades\Debugbar;
 
 // use App\packages\ACME\paymentProfile\src\Models\CustomerInquery;
 
@@ -120,6 +121,7 @@ class paymentProfileController extends Controller
     // sandeep || show inquery page 
     public function showInquery()
     {
+        Debugbar::info('Debugbar test');
         return view('shop::products.customization');
     }
 

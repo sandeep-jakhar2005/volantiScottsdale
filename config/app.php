@@ -252,7 +252,7 @@ return [
         Webkul\RKREZA\Contact\Providers\ContactServiceProvider::class
 
     ])->toArray(),
-
+    
     /*
     |--------------------------------------------------------------------------
     | Class Aliases

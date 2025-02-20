@@ -8,6 +8,10 @@
     src: url(../fonts/font-awesome/Fino-Sans-Regular.otf);
 }
 
+.phpdebugbar{
+    display: block;
+}
+
 .inquiry_modal_body {
    overflow-x: hidden;
  }
