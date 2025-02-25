@@ -75,6 +75,9 @@ class InvoicesController extends Controller
      */
     public function create($orderId)
     {
+
+        $this->connect();
+
         $admin_id = Auth::guard('admin')->user()->id;
         try {
             $invoice_images = invoiceImage::all();
@@ -221,7 +224,7 @@ class InvoicesController extends Controller
                     return  $this->connect();
                     // return response()->json(['error' => 'No tokens found. Please connect again.'], 401);
                 }
-            
+
                 log::info('creaet invoice');
                 $accessToken = $tokenData->access_token;
                 $expiresAt = strtotime($tokenData->access_token_expires_at);
@@ -564,6 +567,7 @@ class InvoicesController extends Controller
                     ];
     
                 } catch (\Exception $e) {
+                    log::error('error' . $e->getMessage() . "\n");
                     file_put_contents('debug.log', 'Error refreshing access token: ' . $e->getMessage() . "\n");
                     return null;
                 }

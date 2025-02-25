@@ -259,6 +259,7 @@ class ShipmentsController extends Controller
                 foreach ($request->file('images') as $file) {
                     $filename = time() . '_' . $file->getClientOriginalName();
                     $file->move(public_path($destinationPath), $filename);
+
                     $uploadedImages[] = $destinationPath . '/' . $filename;
             
                     DB::table('shipment_attachment')->insert([

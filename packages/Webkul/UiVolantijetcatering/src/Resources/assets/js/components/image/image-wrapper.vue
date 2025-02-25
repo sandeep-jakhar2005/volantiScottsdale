@@ -12,13 +12,15 @@
             ></image-item>
         </div>
 
+        <!-- Only show Add Image button when no images are uploaded -->
         <label
             class="btn btn-lg btn-primary"
             style="display: inline-block; width: auto"
             @click="createFileType"
-            v-if="!hideButton"
-            >{{ buttonLabel }}</label
+            v-if="items.length === 0 && !hideButton"
         >
+            {{ buttonLabel }}
+        </label>
     </div>
 </template>
 
@@ -94,7 +96,6 @@ export default {
             if (this.images.length) {
                 this.images.forEach(function(image) {
                     self.items.push(image);
-
                     self.imageCount++;
                 });
             } else if (
@@ -107,7 +108,6 @@ export default {
 
                 images.forEach(function(image) {
                     self.items.push(image);
-
                     self.imageCount++;
                 });
             } else {
@@ -154,6 +154,10 @@ export default {
             Vue.delete(this.items, index);
 
             this.imageCount--;
+
+            if (this.items.length === 0) {
+                this.hideButton = false;
+            }
         }
     },
 
