@@ -244,9 +244,9 @@
                                     <?php echo e(__('shop::app.customer.signup-form.phonenumber')); ?>
 
                                 </label>
-                                <input type="number" class="control form-control form-control-lg phone-field" id="phone"
+                                <input type="text" class="control form-control form-control-lg phone-field" id="phone"
                                     name="phone" value="<?php echo e(old('phone')); ?>"
-                                    v-validate="'required|numeric|min:10|max:14'"
+                                    v-validate="'required'"
                                     data-vv-as="&quot;<?php echo e(__('admin::app.customers.customers.phone')); ?>&quot;">
                                 
                                     <span class="text-danger phone-error control-error"></span>
@@ -392,7 +392,7 @@
 
         // Patterns
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        const phonePattern = /^[0-9]{10,14}$/;
+        const phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
         
 
         // Validation
@@ -506,7 +506,7 @@
         if (value.length === 0) {
             field.siblings('.phone-error').text('Phone number is required.').fadeIn();
             isValid = false;
-        } else if (!/^[0-9]{10,14}$/.test(value)) {
+        } else if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(value)) {
             field.siblings('.phone-error').text('Please enter a valid 10-14 digit phone number.').fadeIn();
             isValid = false;
         } else {

@@ -1,6 +1,8 @@
 @include('paymentprofile::admin.links')
 @php
     use Carbon\Carbon;
+    use Illuminate\Support\Facades\Session;
+    use Illuminate\Support\Facades\Auth;
 @endphp
 @push('css')
     <style>
@@ -146,22 +148,25 @@
             <p style="padding-bottom: 0px">
                 Order No: <strong>{{ $order->increment_id }}</strong>
             </p>
+
+            @if (!(auth('admin')->check() && auth('admin')->user()->role_id === 1))
             <a href="{{ route('order-invoice-view', ['orderid' => $order->id, 'customerid' => $order->customer_id]) }}"
                 style="
-              background: #444444;
-              text-decoration: none;
-              border-radius: 5px;
-              float: left;
-              border: none;
-              color: #fff;
-              font-weight: 600;
-              padding: 9px 15px;
+            background: #444444;
+            text-decoration: none;
+            border-radius: 5px;
+            float: left;
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            padding: 9px 15px;
             ">Place
                 order</a>
+            @endif
         </td>
         <td style="width: 50%; text-align: right">
             <p>
-                Need Help? <br />
+                Need Help? <br/>
                 Call us <a href="tel:1-866-864-8488">(480.657.2426)</a> or
                 <a href="mailto:jetcatering@volantiscottsdale.com" style="color: #007bff; font-weight: 600">Email us
                 </a>

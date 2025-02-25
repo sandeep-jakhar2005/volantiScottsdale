@@ -232,7 +232,7 @@ $(document).ready(function () {
 
 
 
-    var date = new Date();
+    var date = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
     var days = [];
 
     // Get the year, month, and day
@@ -289,8 +289,56 @@ $(document).ready(function () {
     showTimeSlots(); // Show time slots by default
 });
 
-function showTimeSlots() {
+// function showTimeSlots() {
 
+//     var selectedDay;
+//     var timeSlotsSelect = $('#timeSlots');
+//     timeSlotsSelect.empty();
+
+//     if (!$('#daySelect').val() || $('#daySelect').val() === 'Today') {
+//         selectedDay = new Date(); // Use current date
+//     } else if ($('#daySelect').val() === 'Tomorrow') {
+//         var date = new Date();
+//         date.setDate(date.getDate() + 1); // Add 1 day to get tomorrow's date
+//         selectedDay = date;
+//     } else {
+//         selectedDay = parseCustomDate($('#daySelect').val());
+//     }
+
+//     var startDate = new Date(selectedDay);
+//     if (selectedDay.toDateString() === new Date().toDateString()) {
+//         var currentHour = startDate.getHours();
+//         var currentMinute = startDate.getMinutes();
+//         var currentSlotTime = Math.ceil(currentMinute / 15) * 15;
+//         startDate.setHours(currentHour, currentSlotTime, 0, 0);
+//     } else {
+//         startDate.setHours(0, 0, 0, 0);
+//     }
+
+//     var currentDate = new Date(startDate);
+//     var endDate = new Date(startDate);
+//     endDate.setHours(23, 59, 59, 999);
+
+//     $('#timeSlotsList li').remove();
+//     while (currentDate <= endDate) {
+//         var hours = currentDate.getHours();
+//         var minutes = currentDate.getMinutes().toString().padStart(2, '0');
+//         var amPm = hours >= 12 ? "PM" : "AM";
+//         hours = hours % 12;
+//         hours = hours ? hours : 12; // the hour '0' should be '12'
+//         var timeValue = hours + ":" + minutes + " " + amPm;
+
+//         $('#timeSlotsList').append($('<li>', {
+//             label: timeValue,
+//             text: timeValue,
+//         }));
+
+//         currentDate.setMinutes(currentDate.getMinutes() + 30); // Increment by 30 minutes
+//     }
+// }
+
+
+function showTimeSlots() {
     var selectedDay;
     var timeSlotsSelect = $('#timeSlots');
     timeSlotsSelect.empty();
@@ -305,20 +353,52 @@ function showTimeSlots() {
         selectedDay = parseCustomDate($('#daySelect').val());
     }
 
-    var startDate = new Date(selectedDay);
-    if (selectedDay.toDateString() === new Date().toDateString()) {
+    // Convert selectedDay to PST (America/Los_Angeles timezone) manually
+    var options = {
+        timeZone: 'America/Los_Angeles',
+        hour12: true,
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+    };
+
+    // Get formatted string in PST
+    var pstDateString = selectedDay.toLocaleString('en-US', options);
+    var newDateString = new Date().toLocaleString('en-US', options);
+
+    // Create a new Date object using the PST string
+    var selectedDayPST = new Date(pstDateString);
+    var newDatePST = new Date(newDateString);
+
+    var startDate = new Date(selectedDayPST);
+
+    // Adjust time for Today or Tomorrow logic
+    if (selectedDayPST.toDateString() === newDatePST.toDateString()) {
+        console.log('1');
         var currentHour = startDate.getHours();
         var currentMinute = startDate.getMinutes();
-        var currentSlotTime = Math.ceil(currentMinute / 15) * 15;
+        var currentSlotTime = Math.ceil(currentMinute / 15) * 15; // Round to the nearest 15 minutes
         startDate.setHours(currentHour, currentSlotTime, 0, 0);
     } else {
-        startDate.setHours(0, 0, 0, 0);
+        console.log('2');
+
+        startDate.setHours(0, 0, 0, 0); // Midnight for selected day
     }
 
     var currentDate = new Date(startDate);
-    var endDate = new Date(startDate);
-    endDate.setHours(23, 59, 59, 999);
+    console.log('Current Date:', currentDate);
 
+    var endDate = new Date(startDate);
+    console.log('End Date:', endDate);
+
+    // Set end date to the end of the day
+    endDate.setHours(23, 59, 59, 999);
+    console.log('End Date Final:', endDate);
+
+    // Clear existing time slots and create new ones
     $('#timeSlotsList li').remove();
     while (currentDate <= endDate) {
         var hours = currentDate.getHours();
@@ -336,6 +416,11 @@ function showTimeSlots() {
         currentDate.setMinutes(currentDate.getMinutes() + 30); // Increment by 30 minutes
     }
 }
+
+
+
+
+
 
 
 function parseCustomDate(dateString) {
@@ -947,3 +1032,22 @@ $('body').on('click', function () {
     });
 });
 
+
+
+
+
+
+// sandeep add code for show mobile number in usa mobile number formate
+
+$('body').on('input', '#phone', function () {
+    var phone = $(this).val().replace(/\D/g, ''); 
+
+    // Only start formatting when phone length is more than 3 digits
+    if (phone.length > 3 && phone.length <= 6) {
+        phone = '(' + phone.slice(0, 3) + ') ' + phone.slice(3);
+    } else if (phone.length > 6) {
+        phone = '(' + phone.slice(0, 3) + ') ' + phone.slice(3, 6) + '-' + phone.slice(6, 10);
+    }
+
+    $(this).val(phone);
+});

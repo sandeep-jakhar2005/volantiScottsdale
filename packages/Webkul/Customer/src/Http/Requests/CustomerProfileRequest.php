@@ -36,7 +36,7 @@ class CustomerProfileRequest extends FormRequest
             'oldpassword'           => 'required_with:password',
             'password_confirmation' => 'required_with:password',
             'image.*'               => 'mimes:bmp,jpeg,jpg,png,webp',
-            'phone'                 => 'numeric',
+            'phone'                 => 'required|regex:/^\(\d{3}\) \d{3}-\d{4}$/',
         ];
     }
 }

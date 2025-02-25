@@ -55,7 +55,7 @@
                                         <span class="title">
                                             {{ __('admin::app.sales.orders.order-date') }}
                                         </span>
-
+                                        
                                         <span class="value">
                                             {{ core()->formatDate($order->created_at, 'm-d-Y h:i:s') }}
                                         </span>

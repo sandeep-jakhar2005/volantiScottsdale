@@ -51,7 +51,7 @@ Customization Services | Volanti Jet Catering
                     </div>
                     <div class="form-group col-md-6 pl-3">
                         <label for="phone">Phone Number</label>
-                        <input type="number" class="form-control phone-field @error('mobile_number') is-invalid @enderror" id="phone" name="mobile_number" required value="{{ old('mobile_number') }}">
+                        <input type="text" class="form-control phone-field @error('mobile_number') is-invalid @enderror" id="phone" name="mobile_number" required value="{{ old('mobile_number') }}">
                         @error('mobile_number')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -134,7 +134,7 @@ Customization Services | Volanti Jet Catering
                     $('.invalid-feedback, .fname-error, .lname-error, .email-error, .phone-error, .message-error, .file-error, #fileError').empty();
 
                     var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-                         phonePattern = /^[0-9]{10,14}$/;
+                         phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
 
                     // Validation checks
                     if (!fname || fname.length > 25) { 
@@ -238,7 +238,7 @@ Customization Services | Volanti Jet Catering
         if (value.length === 0) {
             field.siblings('.phone-error').text('Phone number is required.').fadeIn();
             isValid = false;
-        } else if (!/^[0-9]{10,14}$/.test(value)) {
+        } else if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(value)) {
             field.siblings('.phone-error').text('Please enter a valid phone number (10 to 14 digits).').fadeIn();
             isValid = false;
         } else {

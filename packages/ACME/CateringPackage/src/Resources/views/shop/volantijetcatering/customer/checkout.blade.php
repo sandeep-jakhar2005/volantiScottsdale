@@ -175,9 +175,9 @@
                                     {{ __('shop::app.fbo-detail.phone-number') }}
                                 </label>
 
-                                <input type="number" class="form-control form-control-lg"
+                                <input type="text" class="form-control form-control-lg" id="phone"
                                     value="{{ isset($fboDetails->phone_number) && $fboDetails->phone_number ? $fboDetails->phone_number : (auth('customer')->check() && auth('customer')->user()->phone ? auth('customer')->user()->phone : '') }}"
-                                    name="phonenumber" v-validate="'required|numeric|min:10|max:12'" />
+                                    name="phonenumber" v-validate="'required'" />
                                 <span class="control-error" v-if="errors.has('phonenumber')"
                                     v-text="errors.first('phonenumber')"></span>
                             </div>
@@ -444,8 +444,8 @@
                                                 <label for="phone number" class="required label-style">
                                                     {{ __('shop::app.fbo-detail.phone-number') }}
                                                 </label>
-                                                <input type="Number" class="form-control form-control-lg" value="{{ $fboDetails->phone_number }}"
-                                                    name="phonenumber" v-validate="'required|numeric|min:10|max:12'" />
+                                                <input type="text" class="form-control form-control-lg" id="phone" value="{{ $fboDetails->phone_number }}"
+                                                    name="phonenumber" v-validate="'required'" />
                                                 <span class="control-error" v-if="errors.has('phonenumber')" v-text="errors.first('phonenumber')"></span>
                                             </div>
 

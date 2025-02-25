@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="image-wrapper">
+        <div class="image-wrapper" v-if="items.length > 0">
             <image-item
                 v-for="image in items"
                 :key="image.id"
@@ -83,13 +83,18 @@ export default {
 
     methods: {
         initImages: function() {
-            if (this.multiple) {
-                this.initMultiple();
-            } else {
-                this.initSingle();
-            }
-        },
 
+            if (this.multiple) {
+                if (this.images.length > 0) {
+                    this.initMultiple();
+                }
+            } else {
+                if (this.images && this.images !== '') {
+                    this.initSingle();
+                }
+            }
+
+        },
         initMultiple: function() {
             let self = this;
 

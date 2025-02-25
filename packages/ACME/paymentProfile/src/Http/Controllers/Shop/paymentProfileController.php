@@ -132,7 +132,7 @@ class paymentProfileController extends Controller
             'fname' => 'required|string|max:25',
             'lname' => 'required|string|max:25',    
             'email' => 'required|email',
-            'mobile_number' => 'required|min:10|max:12',
+            'mobile_number' => 'required|regex:/^\(\d{3}\) \d{3}-\d{4}$/',
             'message' => 'required',
             'uploadfile.*' => 'required|mimes:doc,docx,xls,xlsx,pdf|max:2048',
         ], [

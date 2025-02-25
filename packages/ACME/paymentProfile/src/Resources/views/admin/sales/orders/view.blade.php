@@ -391,7 +391,8 @@
                                                     <label for="phone number" class="required label-style">
                                                         {{ __('shop::app.fbo-detail.phone-number') }}
                                                     </label>
-                                                    <input type="Number" class="form-control form-control-lg"
+                                                    
+                                                    <input type="text" class="form-control form-control-lg usa_mobile_number"
                                                         value="{{ $order->fbo_phone_number }}" name="phonenumber"  id="customer_mobile"
                                                         v-validate="'required'" />
                                                         <span class="" style="color:#FC6868;" id="customermobile-error"></span>
@@ -655,7 +656,7 @@
                                                     <label for="mobile" class="required label-style mandatory">
                                                         {{ __('shop::app.billing-address.mobile') }}
                                                     </label>
-                                                    <input type="number" required class="form-control form-control-lg"
+                                                    <input type="text" required class="form-control form-control-lg usa_mobile_number"
                                                         value="{{ isset($order->billing_address->phone) ? $order->billing_address->phone : '' }}"
                                                         v-validate="'required'" name='mobile' id="BillingMobile" />
                                                         <span class="" style="color:#FC6868;" id="billingMobile-error"></span>
@@ -724,7 +725,7 @@
                                                 <label for="mobile" class="required label-style mandatory">
                                                     {{ __('shop::app.Handling-agent.mobile') }}
                                                 </label>
-                                                <input type="Number" required class="form-control form-control-lg"
+                                                <input type="text" required class="form-control form-control-lg usa_mobile_number"
                                                     value="{{ isset($agent->Mobile) ? $agent->Mobile : '' }}"
                                                     id="mobile" v-validate="'required'" name='mobile' />
                                                 <span class="" style="color:#FC6868;" id="mobile-error"></span>
@@ -1994,6 +1995,21 @@
 //             });
 // });
 
+    // sandeep add code for mobile number shhow in usa formate
+    $('body').on('input', '.usa_mobile_number', function () {
+    var phone = $(this).val().replace(/\D/g, ''); 
+
+    // Only start formatting when phone length is more than 3 digits
+    if (phone.length > 3 && phone.length <= 6) {
+        phone = '(' + phone.slice(0, 3) + ') ' + phone.slice(3);
+    } else if (phone.length > 6) {
+        phone = '(' + phone.slice(0, 3) + ') ' + phone.slice(3, 6) + '-' + phone.slice(6, 10);
+    }
+
+    $(this).val(phone);
+});
+
+
 // sandeep || add mobile validation code
 
 $(function() {
@@ -2973,7 +2989,8 @@ $(function() {
 
 
 
-            var date = new Date();
+            // var date = new Date();
+            var date = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
             var days = [];
 
             // Get the year, month, and day
@@ -3043,8 +3060,28 @@ $(function() {
                 selectedDay = parseCustomDate($('#daySelect').val());
             }
 
-            var startDate = new Date(selectedDay);
-            if (selectedDay.toDateString() === new Date().toDateString()) {
+                // Convert selectedDay to PST (America/Los_Angeles timezone) manually
+                var options = {
+                    timeZone: 'America/Los_Angeles',
+                    hour12: true,
+                    year: 'numeric',
+                    month: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric',
+                };
+
+     // Get formatted string in PST
+    var pstDateString = selectedDay.toLocaleString('en-US', options);
+    var newDateString = new Date().toLocaleString('en-US', options);
+
+    // Create a new Date object using the PST string
+    var selectedDayPST = new Date(pstDateString);
+    var newDatePST = new Date(newDateString);
+
+            var startDate = new Date(selectedDayPST);
+            if (selectedDayPST.toDateString() === newDatePST.toDateString()) {
                 var currentHour = startDate.getHours();
                 var currentMinute = startDate.getMinutes();
                 var currentSlotTime = Math.ceil(currentMinute / 15) * 15;

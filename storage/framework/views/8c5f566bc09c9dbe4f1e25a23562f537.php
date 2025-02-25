@@ -170,7 +170,7 @@
                     </label>
 
                     <div class="col-12">
-                        <input value="<?php echo e(old('phone') ?? $customer->phone); ?>" name="phone"  type="number" v-validate="'length:10,14'"/>
+                        <input value="<?php echo e(old('phone') ?? $customer->phone); ?>" name="phone"  id="phone" type="text" v-validate="'required'"/>
                         <span class="control-error" v-if="errors.has('phone')" v-text="errors.first('phone')"></span>
                     </div>
                 </div>

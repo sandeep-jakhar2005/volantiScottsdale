@@ -93,7 +93,7 @@
 
                     <div class="control-group" :class="[errors.has('phone') ? 'has-error' : '']">
                         <label for="phone">{{ __('admin::app.customers.customers.phone') }}</label>
-                        <input type="text" class="control" id="phone" name="phone" value="{{ old('phone') }}" v-validate="'numeric'"
+                        <input type="text" class="control usa_mobile_number" id="phone" name="phone" value="{{ old('phone') }}" v-validate="'required'"
                          data-vv-as="&quot;{{ __('admin::app.customers.customers.phone') }}&quot;">
                         <span class="control-error" v-if="errors.has('phone')">@{{ errors.first('phone') }}</span>
                     </div>
@@ -115,3 +115,25 @@
         </form>
     </div>
 @stop
+
+
+@push('scripts')
+    <script>
+
+        
+    // sandeep add code for mobile number shhow in usa formate
+    $('body').on('input', '.usa_mobile_number', function () {
+    var phone = $(this).val().replace(/\D/g, ''); 
+
+    // Only start formatting when phone length is more than 3 digits
+    if (phone.length > 3 && phone.length <= 6) {
+        phone = '(' + phone.slice(0, 3) + ') ' + phone.slice(3);
+    } else if (phone.length > 6) {
+        phone = '(' + phone.slice(0, 3) + ') ' + phone.slice(3, 6) + '-' + phone.slice(6, 10);
+    }
+
+    $(this).val(phone);
+});
+
+</script>
+@endpush
