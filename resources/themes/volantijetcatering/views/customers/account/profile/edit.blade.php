@@ -159,7 +159,7 @@
                     </label>
 
                     <div class="col-12">
-                        <input value="{{ old('phone') ?? $customer->phone }}" name="phone"  id="phone" type="text" v-validate="'required'"/>
+                        <input value="{{ old('phone') ?? $customer->phone }}" name="phone"  id="phone" type="text" v-validate="'required|min:14'"/>
                         <span class="control-error" v-if="errors.has('phone')" v-text="errors.first('phone')"></span>
                     </div>
                 </div>

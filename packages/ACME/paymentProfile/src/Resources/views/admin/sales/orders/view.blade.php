@@ -674,7 +674,7 @@
                                                         v-text="errors.first('vat')"></span>
                                                 </div>
 
-                                                <button class="fbo-btn mt-3 m-auto" type="submit">
+                                                <button class="fbo-btn mt-3 m-auto billing_submit_form" type="submit">
                                                     {{ __('shop::app.fbo-detail.fbo-update') }}
                                                 </button>
                                         </form>
@@ -754,7 +754,7 @@
                                                     v-text="errors.first('Handling_charges')"></span>
                                             </div>
 
-                                            <button class="fbo-btn mt-3 m-auto" type="submit">
+                                            <button class="fbo-btn mt-3 m-auto handling_form_submit" type="submit">
                                                 {{ __('shop::app.fbo-detail.fbo-update') }}
                                             </button>
                                     </form>
@@ -1995,6 +1995,26 @@
 //             });
 // });
 
+$('body').on('click', '.fbo_detail_submit, .billing_submit_form, .handling_form_submit', function (event) {
+    var self = this;
+    var evt = event;
+
+    setTimeout(function () {
+        evt.preventDefault();
+        var errorText = '';
+
+        errorText = $('.control-group').find('.control-error').text();
+        var customerMobileError = $('.control-group').find('#customermobile-error').text().trim();
+        var billingMobileError = $('.control-group').find('#billingMobile-error').text().trim();
+        var handlingMobileError = $('.control-group').find('#mobile-error').text().trim();
+
+        if (errorText.trim() !== '' || customerMobileError !== '' || billingMobileError !== '' || handlingMobileError !== '') {
+            return false;
+        }
+
+    }, 10);
+});
+
     // sandeep add code for mobile number shhow in usa formate
     $('body').on('input', '.usa_mobile_number', function () {
     var phone = $(this).val().replace(/\D/g, ''); 
@@ -2274,7 +2294,8 @@ $(function() {
                 var mobilevalid = true;
                 // sandeep add mobile code
                 var mobile = $(this).find('.control-group').find('#customer_mobile').val();
-                if(mobile.length < 10 || mobile.length > 14){
+                var mobileDigits = mobile.replace(/\D/g, '');
+                if(mobileDigits.length < 10 || mobileDigits.length > 14){
                     mobilevalid = false;
                 }
                 $(this).find('input').each(function() {

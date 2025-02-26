@@ -178,7 +178,7 @@
 
                                 <input type="text" class="form-control form-control-lg" id="phone"
                                     value="<?php echo e(isset($fboDetails->phone_number) && $fboDetails->phone_number ? $fboDetails->phone_number : (auth('customer')->check() && auth('customer')->user()->phone ? auth('customer')->user()->phone : '')); ?>"
-                                    name="phonenumber" v-validate="'required'" />
+                                    name="phonenumber" v-validate="'required|min:14'" />
                                 <span class="control-error" v-if="errors.has('phonenumber')"
                                     v-text="errors.first('phonenumber')"></span>
                             </div>
@@ -437,7 +437,7 @@
 
                                                 </label>
                                                 <input type="text" class="form-control form-control-lg" id="phone" value="<?php echo e($fboDetails->phone_number); ?>"
-                                                    name="phonenumber" v-validate="'required'" />
+                                                    name="phonenumber" v-validate="'required|min:14'" />
                                                 <span class="control-error" v-if="errors.has('phonenumber')" v-text="errors.first('phonenumber')"></span>
                                             </div>
 
@@ -1359,6 +1359,13 @@
 
                                     <?php if(auth()->guard('customer')->check()): ?>
                                         if (!paymentsaved && !rediocheked.length) {
+                                            if ($('.payment-saved input[type="radio"]').length) {
+                                            console.log('Saved cards found');
+                                            $('.payment-saved input[type="radio"]').not('#saved-cards input[type="radio"]').trigger('click');
+                                        } else {
+                                            console.log('No saved cards, using unsaved');
+                                            $('.payment-unsave input[type="radio"]').not('#saved-cards input[type="radio"]').trigger('click');
+                                        }
                                             $("#open-mpauthorizenet-modal").trigger('click');
                                             checkPlacedOrder="placed_order"
                                             return;
@@ -1366,6 +1373,7 @@
                                     <?php endif; ?>
                                     <?php if(auth()->guard()->guest()): ?>
                                     if (!paymentsaved) {
+                                        $('.payment-unsave input[type="radio"]').not('#saved-cards input[type="radio"]').trigger('click');
                                         $("#open-mpauthorizenet-modal").trigger('click');
                                         checkPlacedOrder="placed_order"
                                         return;

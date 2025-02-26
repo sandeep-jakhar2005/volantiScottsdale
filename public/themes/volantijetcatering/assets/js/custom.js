@@ -1041,7 +1041,7 @@ $('body').on('click', function () {
 
 $('body').on('input', '#phone', function () {
     var phone = $(this).val().replace(/\D/g, ''); 
-
+    
     // Only start formatting when phone length is more than 3 digits
     if (phone.length > 3 && phone.length <= 6) {
         phone = '(' + phone.slice(0, 3) + ') ' + phone.slice(3);

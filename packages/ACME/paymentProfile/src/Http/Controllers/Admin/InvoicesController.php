@@ -177,7 +177,7 @@ class InvoicesController extends Controller
             
             session()->flash('success', 'Invoiced sent Successfully!');
             // sandeep send quickbook invoice using queue
-            // ProcessQuickBooksInvoice::dispatch($orderId);
+            ProcessQuickBooksInvoice::dispatch($orderId);
         
             // $this->createInvoice($orderId);
             // return redirect()->route('quickbooks.invoice.create',['orderId'=>$orderId]);

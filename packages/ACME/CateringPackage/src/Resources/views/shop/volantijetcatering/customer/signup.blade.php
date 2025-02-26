@@ -418,6 +418,7 @@
         // Patterns
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
         const phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
+        let phoneDigits = phoneNumber.replace(/\D/g, '').length;
         
 
         // Validation
@@ -436,7 +437,7 @@
         } else {
             if (!fname) { $('.fname-error').text('First name is required.').fadeIn(); hasError = true; }
                     if (!lname) { $('.lname-error').text('Last name is required.').fadeIn(); hasError = true; }
-                    if (!phoneNumber || !phonePattern.test(phoneNumber)) { 
+                    if (phoneDigits < 10 || !phoneNumber || !phonePattern.test(phoneNumber)) { 
                         $('.phone-error').text(phoneNumber ? 'Please enter a valid 10-14 digit phone number.' : 'Phone number is required.').fadeIn(); 
                         hasError = true; 
                     }
@@ -531,7 +532,7 @@
         if (value.length === 0) {
             field.siblings('.phone-error').text('Phone number is required.').fadeIn();
             isValid = false;
-        } else if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(value)) {
+        } else if (value.replace(/\D/g, '').length < 10 || !/^\(\d{3}\) \d{3}-\d{4}$/.test(value)) {
             field.siblings('.phone-error').text('Please enter a valid 10-14 digit phone number.').fadeIn();
             isValid = false;
         } else {

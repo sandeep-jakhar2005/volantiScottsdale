@@ -158,7 +158,7 @@
                         id="phone"
                         name="phone"
                         value="<?php echo e($customer->phone); ?>"
-                        v-validate="'required'"
+                        v-validate="'required|min:14'"
                         data-vv-as="&quot;<?php echo e(__('admin::app.customers.customers.phone')); ?>&quot;">
 
                     <span class="control-error" v-if="errors.has('phone')">{{ errors.first('phone') }}</span>

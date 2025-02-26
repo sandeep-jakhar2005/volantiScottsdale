@@ -1,5 +1,16 @@
 @extends('shop::layouts.master')
 
+@section('page_title')
+Customization Services | Volanti Jet Catering
+@stop
+
+@section('seo')
+<meta name="title" content="Customization Services | Volanti Jet Catering" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+@stop
+
+
 @section('content-wrapper')
 <div class="container mt-5">
     <div class="card border-0 p-4 thank-page-card">

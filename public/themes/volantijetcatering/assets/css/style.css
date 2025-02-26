@@ -16,6 +16,13 @@
     background-color: #f84661 !important;
 }
 
+.nav-container .wrapper ul li {
+    display: flex;
+}
+
+.nav-container .wrapper ul li a{
+    display: flex;
+}
 
 .phpdebugbar{
     display: block;
@@ -1270,6 +1277,15 @@ body .custom-dropdown select option:hover {
 .section-1,
 .slider-container img {
     margin-top: -5px !important;
+}
+
+.section-1 .homepage_background_image{
+    background-image: url("/themes/volantijetcatering/assets/images/home_bg.jpg");
+    background-repeat: no-repeat;
+    height: 100% !important;
+    width: 100% !important;
+    background-size: cover;
+    background-position: center center;
 }
 
 /* category list --temporary */
