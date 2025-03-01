@@ -6,8 +6,10 @@ Customization Services | Volanti Jet Catering
 
 <?php $__env->startSection('seo'); ?>
 <meta name="title" content="Customization Services | Volanti Jet Catering" />
-<meta name="description" content="" />
+<meta name="description" content="Customization Services | Volanti Jet Catering" />
 <meta name="keywords" content="" />
+<link rel="canonical" href="<?php echo e(url()->current()); ?>" />
+
 <?php $__env->stopSection(); ?>
 
 
@@ -18,7 +20,7 @@ Customization Services | Volanti Jet Catering
 
             <!-- Header Section -->
             <div class="thankyou_page_header mb-5">
-                <img src="/themes/volantijetcatering/assets/images/tick.png" style="width: 100px">
+                <img src="/themes/volantijetcatering/assets/images/tick.png" style="width: 100px" alt="tick icon">
                 <h1 class="card-title">Thank You for Contacting Us</h1>
                 <p class="thank-tittle">One of our sales representatives will get in touch with you soon.</p>
             </div>

@@ -8,12 +8,13 @@ Customization Services | Volanti Jet Catering
 <meta name="title" content="Customization Services | Volanti Jet Catering" />
 <meta name="description" content="Have questions or special requests? Use our easy-to-fill custom enquiry form to get in touch with volanti jet catering for menu inquiries, catering quotes, orders, and more. We’ll get back to you promptly!" />
 <meta name="keywords" content="" />
+<link rel="canonical" href="<?php echo e(url()->current()); ?>" />
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content-wrapper'); ?>
 <div class="container mt-5 d-flex justify-content-center">
     <div class="card p-4 customization-card">
-        <h2 class="text-center my-5">Custom Order Enquiry</h2>
+        <h1 class="text-center my-5">Custom Order Enquiry</h1>
 
         <div class="body">
             <form action="<?php echo e(route('store.inquery')); ?>" method="POST" enctype="multipart/form-data" id="customizationForm">

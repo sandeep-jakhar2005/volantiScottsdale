@@ -12,7 +12,8 @@
 @if (! request()->is('/'))
     <meta name="title" content="Menu | Volanti Jet Catering"/>
     <meta name="description" content="Explore our diverse food menu, packed with flavors to suit every craving. From classic favorites to exciting new dishes, find the perfect meal for any occasion!"/>
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="Online Food Menu" />
+    <link rel="canonical" href="{{ url()->current() }}" />
 @endif
 @stop
 
@@ -31,19 +32,25 @@ $islogin = 0;
 $address = Db::table('addresses')->where('customer_token',$guestToken)->first();
 }
 
-if($address!=''){
 @endphp
 
 
-    <div class="listing-overlay w-100">
+
+    <div class="listing-overlay w-100 d-flex" style="min-height: 210px; align-items: center;">
         <div class="container p-4">
-         
+        
+            @if($address!='')
             <div class=" listing-banner-contant border-0">
-                <h2 class="listing-banner-heading">{{$address->airport_name}}</h2>
+                <h1 class="listing-banner-heading">{{$address->airport_name}}</h1>
                 <p class="listing-paragraph-1">{{$address->address1}}, </p>
                 <p class="listing-paragraph-2">{{$address->state}} {{$address->postcode }},{{$address->country }}</p>
             </div>
-           
+           @else
+            <div class="listing-banner-choose-contant border-0">
+                <h1 class="listing-banner-choose-heading"><a href="{{ route('shop.home.index') }}">Choose Location</a></h1>
+            </div>
+           @endif
+        
 
             {{-- <div class="listing-searchbar">
                 <div class="category-search-icon">
@@ -51,9 +58,6 @@ if($address!=''){
                 </div>
                 <input type="text" class="form-control" id="category-search" placeholder="Search the menu...">
             </div> --}}
-            @php
-            }
-            @endphp
         </div>
     </div>
     <div class="container category-page mb-5">

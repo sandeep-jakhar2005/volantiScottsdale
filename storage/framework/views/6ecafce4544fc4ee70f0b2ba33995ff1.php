@@ -26,6 +26,8 @@
 <meta name="title" content="Account Login | Volanti Jet Catering" />
 <meta name="description" content="Join us for a delightful journey of flavors! Sign up to explore exclusive menus, personalized offers, and a seamless food ordering experience." />
 <meta name="keywords" content="" />
+<link rel="canonical" href="<?php echo e(url()->current()); ?>" />
+
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts'); ?>

@@ -1325,12 +1325,13 @@ body .mini-cart-instruction {
     height: 165px;
 }
 
-.empty-cart-message p {
-    font-size: 30px;
+.empty-cart-message h1 {
+    font-size: 32px;
     font-weight: 600;
+    font-family: Montserrat !important;
 }
 
-.empty-cart-message p span {
+.empty-cart-message h1 span {
     color: #FF1212;
 }
 
@@ -4324,7 +4325,7 @@ display: none !important;
             10px !important;
     }
 
-    .empty-cart-message p {
+    .empty-cart-message h1 {
         font-size: 20px;
     }
 
@@ -4788,6 +4789,13 @@ display: none !important;
     background-size: inherit;
     background-repeat: no-repeat;
 }
+
+.listing-overlay .listing-banner-choose-contant .listing-banner-choose-heading a{
+    color: white;
+    text-decoration: underline;
+    font-size: 30px;
+}
+
 
 .listing-searchbar .form-control::placeholder {
     color: #727272;

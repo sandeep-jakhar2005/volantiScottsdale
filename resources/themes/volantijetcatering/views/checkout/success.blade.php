@@ -6,8 +6,9 @@
 
 @section('seo')
 <meta name="title" content="{{ __('shop::app.checkout.success.title') }}" />
-<meta name="description" content="" />
+<meta name="description" content="Order successfully placed" />
 <meta name="keywords" content="" />
+<link rel="canonical" href="{{ url()->current() }}" />
 @stop
 
 @section('content-wrapper')

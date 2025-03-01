@@ -28,6 +28,7 @@ class NewOrderNotification extends Mailable
      */
     public function build()
     {
+
         return $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
             ->to($this->order->customer_email, $this->order->customer_full_name)
             ->subject(trans('shop::app.mail.order.subject'))

@@ -11,6 +11,8 @@
 <meta name="title" content="{{ app('request')->input('term') ? app('request')->input('term') . ' | Volanti Jet Catering' : '| Volanti Jet Catering' }}" />
 <meta name="description" content="Find your favorite dishes and ingredients with ease! Use our search to explore a world of delicious options tailored to your cravings." />
 <meta name="keywords" content="" />
+<link rel="canonical" href="{{ url()->current() }}" />
+
 @stop
 
 @push('css')

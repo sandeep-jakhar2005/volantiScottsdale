@@ -5,7 +5,7 @@
 
 <?php $__env->startSection('seo'); ?>
 <meta name="title" content="<?php echo e(__('shop::app.checkout.success.title')); ?>" />
-<meta name="description" content="" />
+<meta name="description" content="Order successfully placed" />
 <meta name="keywords" content="" />
 <?php $__env->stopSection(); ?>
 

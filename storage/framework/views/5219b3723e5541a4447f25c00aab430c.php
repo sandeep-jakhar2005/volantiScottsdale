@@ -107,7 +107,7 @@
         <div class="row home__airport__search">
             <div class="col-lg-3 col-md-3 col-12 mx-auto padding search_label_wrapper d-md-flex">
                 <img class="Navigation-image"
-                    src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/airport.svg')); ?>" alt="" />
+                    src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/airport.svg')); ?>" alt="airplane image" />
                 <p class="m-0 text-center">
                     Airport
                 </p>
@@ -116,7 +116,7 @@
             <div class="search-content col-lg-9 col-md-9 col-12 pr-0 pl-0 padding ">
                 <div class="searchbar" id="airport_select_searchbar">
                     <img class="Navigation-image home_border_left"
-                        src="<?php echo e(asset('themes/velocity/assets/images/navigation.png')); ?>" alt="" />
+                        src="<?php echo e(asset('themes/velocity/assets/images/navigation.png')); ?>" alt="location image" />
                     <input type="text" id="auto_search" class="form-control w-100 pr-2 pl-2"
                         placeholder="Search Delivery Location" 
                         <?php if(isset($address)): ?> data="<?php echo e($address->id); ?>" value="<?php echo e($address->airport_name); ?>" <?php endif; ?>>
@@ -130,7 +130,7 @@
         <div class="row  airport__fbo__detail">
             <div class="col-lg-3 col-md-3 col-12 mx-auto padding search_label_wrapper d-md-flex">
                 <img class="Navigation-image"
-                    src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/store-label.svg')); ?>" alt="" />
+                    src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/store-label.svg')); ?>" alt="store image" />
                 <p class="m-0 text-center fbo_name">
                     FBO
                 </p>
@@ -144,7 +144,7 @@
                         <?php if(isset($airport_fbo)): ?> value="<?php echo e($airport_fbo); ?>" <?php endif; ?>>
                     <img class="Navigation-image pointer" id="airport-fbo-input"
                         src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/down-arrow.svg')); ?>"
-                        alt="" />
+                        alt="home down arrow" />
                     <input type="hidden" id="selected-fbo-id" name="selected_fbo_id" <?php if(isset($address)): ?> value="<?php echo e($address->airport_fbo_id); ?>" <?php endif; ?>>
                     <div id="airport-fbo-list" class="custom-dropdown-list text-justify d-none">
                         <!-- Options will be inserted here -->
@@ -158,7 +158,7 @@
             <div
                 class="col-lg-3 col-md-3 col-12 mx-lg-auto padding search_label_wrapper search_label_wrapper_first search_label_wrapper_when d-md-flex">
                 <img class="Navigation-image" src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/time.svg')); ?>"
-                    alt="" />
+                    alt="time image" />
                 <p class="m-0 text-left whrn-text">
                     When
                 </p>
@@ -166,7 +166,7 @@
 
             <div class="col-lg-5 col-md-5 col-6 pr-0 pl-0 padding search_label_wrapper" id="time_search_label">
                 <img class="Navigation-image pl-3"
-                    src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/calendar-alt.svg')); ?>" alt="" />
+                    src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/calendar-alt.svg')); ?>" alt="calender image" />
                 <div class='datetime'>
                     
                     <div class="form-group m-0">
@@ -187,7 +187,7 @@
             </div>
             <div class="col-lg-4 col-md-4 col-6 pr-0 pl-0 padding search_label_wrapper pl-3 d-flex delivery_time_slot">
                 <img class="Navigation-image" src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/time.svg')); ?>"
-                    alt="" />
+                    alt="time image" />
                 <div class='datetime'>
                     <div class="form-group m-0">
                         <div class='input-group date time_date_picker d-block' id='datetimepicker2'>

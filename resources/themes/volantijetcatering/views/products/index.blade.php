@@ -11,10 +11,12 @@ $guestToken = Session::token();
 @section('page_title')
 {{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}
 @stop
+
 @section('seo')
 <meta name="title" content="{{ trim($category->meta_title) != "" ? $category->meta_title : $category->name }}" />
 <meta name="description" content="{{ $category->meta_description }}" />
 <meta name="keywords" content="{{ $category->meta_keywords }}" />
+<link rel="canonical" href="{{ url()->current() }}" />
 @if (core()->getConfigData('catalog.rich_snippets.categories.enable'))
 <script type="application/ld+json">
     {
@@ -63,7 +65,7 @@ null,
 @push('scripts')
 <script type="text/x-template" id="category-template">
     <section class="row col-12 velocity-divide-page category-page-wrapper">  
-   <div class="listing-overlay w-100">
+   <div class="listing-overlay w-100 d-flex" style="min-height:190px; align-items:center">
                    <div class="container ">
                    @php 
                    $customer = auth()->guard('customer')->user();                           
@@ -77,17 +79,21 @@ null,
                            $islogin = 0;
                            $address = Db::table('addresses')->where('customer_token',$guestToken)->first();
                        }
-                                                  
-                      if($address!=''){
-                       @endphp
+                
+                    @endphp
+                    @if($address!='')
+                    
                        <div class=" listing-banner-contant py-3">
                            <h2 class="listing-banner-heading">{{$address->airport_name}}</h2>
                            <p class="listing-paragraph-1">{{$address->address1}}, </p>
                            <p class="listing-paragraph-2">{{$address->state}} {{$address->postcode }},{{$address->country }}</p>        
                        </div>
-                       @php
-                      }
-                       @endphp
+                       @else
+                       <div class="listing-banner-choose-contant py-3">
+                        <h1 class="listing-banner-choose-heading"><a href="{{ route('shop.home.index') }}">Choose Location</a></h1>
+                    </div>
+                    @endif
+                       
                        {{-- <div class="listing-searchbar">
                            <div class="category-search-icon">
                            <img src="/themes/volantijetcatering/assets/images/black-search-icon.png">

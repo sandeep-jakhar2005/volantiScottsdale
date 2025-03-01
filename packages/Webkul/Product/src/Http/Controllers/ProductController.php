@@ -149,6 +149,7 @@ class ProductController extends Controller
         return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }   
 
+    
     /**
      * Update the specified resource in storage.
      *

@@ -7,7 +7,7 @@
 
 @section('seo')
 <meta name="title" content="Order #{{$order->increment_id}} | Volanti Jet Catering" />
-<meta name="description" content="" />
+<meta name="description" content="Order #{{$order->increment_id}} | Volanti Jet Catering" />
 <meta name="keywords" content="" />
 @stop
 

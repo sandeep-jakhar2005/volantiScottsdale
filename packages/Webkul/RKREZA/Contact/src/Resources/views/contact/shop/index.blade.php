@@ -4,13 +4,17 @@
     {{ __('contact_lang::app.shop.title') }}
 @endsection
 
+@section('seo')
+<link rel="canonical" href="{{ url()->current() }}" />
+@stop
+
 @section('content-wrapper')
     <div class="contact-us-container container mt-5  pl-2 pr-2 pl-lg-5 pr-lg-5 pl-md-5 pr-md-5">
         <div class="row pl-3 pr-3 pl-lg-5 pr-lg-5">
             <!-- Left Section -->
             <div class="col-lg-8 mb-5 contact-us-form p-0">
                 <span class="d-flex align-items-center section-title mb-2">
-                <h2 class="p-2 mb-0">Send us a message</h2>
+                <h1 class="p-2 mb-0">Send us a message</h1>
                 <img src="{{ asset('themes/volantijetcatering/assets/images/message-icon.png') }}" alt="Email Icon" height="30px" width="30px" class="ml-auto pr-1"/>
             </span>
                 <div class="send-message-section pl-4 pr-4">
@@ -53,7 +57,7 @@
             <div class="col-lg-4 contact-email-details pl-lg-4 pr-lg-4 pl-1 pr-1 mb-5">
                 <div class="contact-email-section">
                     <span class="d-flex align-items-center contact-details-section">
-                        <h3 class="email-title p-2 mb-0 ms-2">Contact Detail</h3>
+                        <h2 class="email-title p-2 mb-0 ms-2">Contact Detail</h2>
                         <img src="{{ asset('themes/volantijetcatering/assets/images/call.png') }}" alt="Email Icon" height="30px" width="30px" class="ml-auto pr-1"/>
                     </span>
                 <div class="email-section p-3">

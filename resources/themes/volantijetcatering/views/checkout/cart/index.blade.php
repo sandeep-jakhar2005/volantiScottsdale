@@ -9,8 +9,9 @@
 
 @section('seo')
 <meta name="title" content="Shopping Cart | Volanti Jet Catering" />
-<meta name="description" content="" />
+<meta name="description" content="Shopping Cart | Volanti Jet Catering" />
 <meta name="keywords" content="" />
+<link rel="canonical" href="{{ url()->current() }}" />
 @stop
 
 @section('content-wrapper')
@@ -270,7 +271,7 @@
                             </div>
                             <div class="fs16 col-12 empty-cart-message mt-4">
                             {{-- {{ __('shop::app.checkout.cart.empty') }} --}}
-                                <p>Your Shopping Cart is<span> Empty! </span> </p>
+                                <h1 class="mb-3">Your Shopping Cart is<span> Empty! </span> </h1>
                             </div>
 
                             <a class="fs16 mt15 col-12 remove-decoration continue-shopping"

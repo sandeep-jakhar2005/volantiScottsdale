@@ -5,11 +5,11 @@
             @if ($logo = core()->getCurrentChannel()->logo_url)
                 <img
                     src="{{ $logo }}"
-                    class="logo full-img" alt="" width="200" height="50" />
+                    class="logo full-img" alt="test logo" width="200" height="50" />
             @else
                 <img
                     src="{{ asset('themes/velocity/assets/images/static/logo-text-white.png') }}"
-                    class="logo full-img" alt="" width="200" height="50" />
+                    class="logo full-img" alt="logo test white" width="200" height="50" />
             @endif
         </a>
     </div>

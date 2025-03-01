@@ -2,7 +2,6 @@
 
 <?php
     $channel = core()->getCurrentChannel();
-
     $homeSEO = $channel->home_seo;
 
     if (isset($homeSEO)) {
@@ -35,6 +34,10 @@
             <meta name="keywords" content="<?php echo e($metaKeywords); ?>" />
         <?php endif; ?>
     <?php endif; ?>
+
+    <link rel="canonical" href="<?php echo e(url()->current()); ?>">
+
+    
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('css'); ?>
@@ -73,7 +76,7 @@
                             <h5 class="modal-title text-center" id="exampleModalCenterTitle">
                                 <img class="Navigation-image"
                                     src="<?php echo e(asset('themes/volantijetcatering/assets/images/home/store.svg')); ?>"
-                                    alt="" />
+                                    alt="store image" />
                                 Add New 
                             </h5>
                             <button type="button" class="fboClose" data-dismiss="modal" aria-label="Close">
@@ -104,7 +107,7 @@
 
                                 <button id="add-fbo-button">
                                     <img class='suggestion-icon'
-                                        src='/themes/volantijetcatering/assets/images/home/plus-circle1.svg'>
+                                        src='/themes/volantijetcatering/assets/images/home/plus-circle1.svg' alt="plus circle image">
                                     ADD</button>
                             </div>
                         </div>

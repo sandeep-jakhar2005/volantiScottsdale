@@ -12,7 +12,7 @@
 
 @section('seo')
 <meta name="title" content="Account | Volanti Jet Catering" />
-<meta name="description" content="" />
+<meta name="description" content="Account | Volanti Jet Catering" />
 <meta name="keywords" content="" />
 @stop
 

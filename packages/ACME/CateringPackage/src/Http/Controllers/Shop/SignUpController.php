@@ -441,9 +441,7 @@ class SignUpController extends Controller
         // Format the date as desired
         $formattedDate = $date->format('Y-n-j');
 
-
         // dd($request);
-
         $customerId = Auth::guard('customer')->id();
         $customer_token = $request->_token;
 

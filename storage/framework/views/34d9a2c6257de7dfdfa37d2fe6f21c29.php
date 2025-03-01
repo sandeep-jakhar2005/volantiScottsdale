@@ -12,10 +12,12 @@ $guestToken = Session::token();
 <?php echo e(trim($category->meta_title) != "" ? $category->meta_title : $category->name); ?>
 
 <?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('seo'); ?>
 <meta name="title" content="<?php echo e(trim($category->meta_title) != "" ? $category->meta_title : $category->name); ?>" />
 <meta name="description" content="<?php echo e($category->meta_description); ?>" />
 <meta name="keywords" content="<?php echo e($category->meta_keywords); ?>" />
+<link rel="canonical" href="<?php echo e(url()->current()); ?>" />
 <?php if(core()->getConfigData('catalog.rich_snippets.categories.enable')): ?>
 <script type="application/ld+json">
     {
@@ -64,7 +66,7 @@ null,
 <?php $__env->startPush('scripts'); ?>
 <script type="text/x-template" id="category-template">
     <section class="row col-12 velocity-divide-page category-page-wrapper">  
-   <div class="listing-overlay w-100">
+   <div class="listing-overlay w-100 d-flex" style="min-height:190px; align-items:center">
                    <div class="container ">
                    <?php 
                    $customer = auth()->guard('customer')->user();                           
@@ -78,17 +80,21 @@ null,
                            $islogin = 0;
                            $address = Db::table('addresses')->where('customer_token',$guestToken)->first();
                        }
-                                                  
-                      if($address!=''){
-                       ?>
+                
+                    ?>
+                    <?php if($address!=''): ?>
+                    
                        <div class=" listing-banner-contant py-3">
                            <h2 class="listing-banner-heading"><?php echo e($address->airport_name); ?></h2>
                            <p class="listing-paragraph-1"><?php echo e($address->address1); ?>, </p>
                            <p class="listing-paragraph-2"><?php echo e($address->state); ?> <?php echo e($address->postcode); ?>,<?php echo e($address->country); ?></p>        
                        </div>
-                       <?php
-                      }
-                       ?>
+                       <?php else: ?>
+                       <div class="listing-banner-choose-contant py-3">
+                        <h1 class="listing-banner-choose-heading"><a href="<?php echo e(route('shop.home.index')); ?>">Choose Location</a></h1>
+                    </div>
+                    <?php endif; ?>
+                       
                        
                    </div>
                </div>

@@ -6,10 +6,10 @@
             @if (request()->is('/'))
                 <img class="logo ml-5"
                     src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/volantijetcatering/assets/images/logo-only.png') }}"
-                    alt="" />
+                    alt="volanti logo" />
             @else
                 <img class="logo"
-                    src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/volantijetcatering/assets/images/logo-volanti-dark.png') }}">
+                    src="{{ core()->getCurrentChannel()->logo_url ?? asset('themes/volantijetcatering/assets/images/logo-volanti-dark.png') }}" alt="volanti logo" />
             @endif
         </a>
         <div class="right searchbar">
@@ -22,7 +22,7 @@
                             <i class="fs16 fw6 rango-search d-flex" style="font-size: 21px;padding: 0 10px 0 5px;"></i>
                         </div>
                         <img class="header_searchbar_close_button"
-                            src="{{ asset('themes/volantijetcatering/assets/images/close.png') }}" alt=""
+                            src="{{ asset('themes/volantijetcatering/assets/images/close.png') }}" alt="close icon"
                             style="height: 20px; width: 40px; padding: 0px 16px 0px 5px;display:none;" />
                         <div class="volanti_site_button pr-3">
                             {{-- menu added --}}
@@ -51,7 +51,7 @@
                                     @else
                                          <a href="{{ route('shop.customer.session.index') }}">
                                         <img src="{{ asset('/../themes/volantijetcatering/assets/images/profile-user.png') }}"
-                                            alt="" height="25px" />
+                                            alt="profile icon" height="25px" />
                                          </a>
                                     @endif
 
@@ -170,7 +170,7 @@
 
                         </div>
                         <!--  <div class="cart-wrapper">
-                                        <img src="{{ asset('themes/velocity/assets/images/shopping-bag-icon.png') }}" alt="" />
+                                        {{-- <img src="{{ asset('themes/velocity/assets/images/shopping-bag-icon.png') }}" alt="" /> --}}
                                     </div> -->
 
 

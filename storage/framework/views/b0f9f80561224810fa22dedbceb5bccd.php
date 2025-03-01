@@ -12,7 +12,8 @@
 <?php if(! request()->is('/')): ?>
     <meta name="title" content="Menu | Volanti Jet Catering"/>
     <meta name="description" content="Explore our diverse food menu, packed with flavors to suit every craving. From classic favorites to exciting new dishes, find the perfect meal for any occasion!"/>
-    <meta name="keywords" content="" />
+    <meta name="keywords" content="Online Food Menu" />
+    <link rel="canonical" href="<?php echo e(url()->current()); ?>" />
 <?php endif; ?>
 <?php $__env->stopSection(); ?>
 
@@ -31,24 +32,27 @@ $islogin = 0;
 $address = Db::table('addresses')->where('customer_token',$guestToken)->first();
 }
 
-if($address!=''){
 ?>
 
 
-    <div class="listing-overlay w-100">
+
+    <div class="listing-overlay w-100 d-flex" style="min-height: 210px; align-items: center;">
         <div class="container p-4">
-         
+        
+            <?php if($address!=''): ?>
             <div class=" listing-banner-contant border-0">
-                <h2 class="listing-banner-heading"><?php echo e($address->airport_name); ?></h2>
+                <h1 class="listing-banner-heading"><?php echo e($address->airport_name); ?></h1>
                 <p class="listing-paragraph-1"><?php echo e($address->address1); ?>, </p>
                 <p class="listing-paragraph-2"><?php echo e($address->state); ?> <?php echo e($address->postcode); ?>,<?php echo e($address->country); ?></p>
             </div>
-           
+           <?php else: ?>
+            <div class="listing-banner-choose-contant border-0">
+                <h1 class="listing-banner-choose-heading"><a href="<?php echo e(route('shop.home.index')); ?>">Choose Location</a></h1>
+            </div>
+           <?php endif; ?>
+        
 
             
-            <?php
-            }
-            ?>
         </div>
     </div>
     <div class="container category-page mb-5">

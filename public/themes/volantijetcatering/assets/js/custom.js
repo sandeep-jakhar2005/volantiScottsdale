@@ -923,9 +923,10 @@ $('body').on('click', '.checkout__button, .fbo_button, .profile_update_button', 
             errorText = $('.control-group').find('.control-error').text();
         } else if ($(self).hasClass('profile_update_button')) {
             errorText = $('.row').find('.control-error').text();
-        } else if ($(self).hasClass('checkout__button')) {
+        } else if ($(self).hasClass('.checkout__button')) {
             errorText = "";
         }
+        
         if (errorText.trim() == '') {
             $(self).prop('disabled', false);
             $(self).html('<span class="btn-ring"></span>');
@@ -1041,7 +1042,7 @@ $('body').on('click', function () {
 
 $('body').on('input', '#phone', function () {
     var phone = $(this).val().replace(/\D/g, ''); 
-    
+
     // Only start formatting when phone length is more than 3 digits
     if (phone.length > 3 && phone.length <= 6) {
         phone = '(' + phone.slice(0, 3) + ') ' + phone.slice(3);
@@ -1050,4 +1051,5 @@ $('body').on('input', '#phone', function () {
     }
 
     $(this).val(phone);
+
 });

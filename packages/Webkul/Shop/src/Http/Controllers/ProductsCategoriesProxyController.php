@@ -135,7 +135,7 @@ class ProductsCategoriesProxyController extends Controller
     // sandeep || this get all the category products
     public function getCategorydetail($categoryId)
     {
-        
+
         /* fetch category details */
         $categoryDetails = $this->categoryRepository->find($categoryId);
         if (!$categoryDetails) {
@@ -144,7 +144,6 @@ class ProductsCategoriesProxyController extends Controller
                 'products' => [],
                 'paginationHTML' => '',
                 'product_category' => [],
-
             ]);
         }
 
@@ -152,7 +151,6 @@ class ProductsCategoriesProxyController extends Controller
         $products = $this->productRepository->getAll($categoryId);
         $products->withPath($categoryDetails->slug);
         $productCategoryId = array_map('intval', explode(',', $categoryId)); //converted to integer
-
 
 
         return [

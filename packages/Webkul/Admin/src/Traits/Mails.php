@@ -31,20 +31,25 @@ trait Mails
             /**
              * Email to customer.
              */
+
+        if($order->customer_email){
             $configKey = 'emails.general.notifications.emails.general.notifications.new-order';
 
             if (core()->getConfigData($configKey)) {
                 $this->prepareMail($customerLocale, new NewOrderNotification($order));
             }
+        }
 
             /**
              * Email to admin.
              */
-            $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
 
-            if (core()->getConfigData($configKey)) {
-                $this->prepareMail(config('app.locale'), new NewAdminNotification($order));
-            }
+            //  sandeep comment code send email to admin
+            // $configKey = 'emails.general.notifications.emails.general.notifications.new-admin';
+
+            // if (core()->getConfigData($configKey)) {
+            //     $this->prepareMail(config('app.locale'), new NewAdminNotification($order));
+            // }
         } catch (\Exception $e) {
             report($e);
         }

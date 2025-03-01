@@ -131,6 +131,8 @@
     <meta name="title" content="Checkout" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    <link rel="canonical" href="{{ url()->current() }}" />
+    
 @stop
 
 {{-- @dd($fboDetails) --}}

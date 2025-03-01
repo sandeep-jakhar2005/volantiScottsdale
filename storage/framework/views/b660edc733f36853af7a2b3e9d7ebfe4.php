@@ -6,10 +6,10 @@
             <?php if(request()->is('/')): ?>
                 <img class="logo ml-5"
                     src="<?php echo e(core()->getCurrentChannel()->logo_url ?? asset('themes/volantijetcatering/assets/images/logo-only.png')); ?>"
-                    alt="" />
+                    alt="volanti logo" />
             <?php else: ?>
                 <img class="logo"
-                    src="<?php echo e(core()->getCurrentChannel()->logo_url ?? asset('themes/volantijetcatering/assets/images/logo-volanti-dark.png')); ?>">
+                    src="<?php echo e(core()->getCurrentChannel()->logo_url ?? asset('themes/volantijetcatering/assets/images/logo-volanti-dark.png')); ?>" alt="volanti logo" />
             <?php endif; ?>
         </a>
         <div class="right searchbar">
@@ -22,7 +22,7 @@
                             <i class="fs16 fw6 rango-search d-flex" style="font-size: 21px;padding: 0 10px 0 5px;"></i>
                         </div>
                         <img class="header_searchbar_close_button"
-                            src="<?php echo e(asset('themes/volantijetcatering/assets/images/close.png')); ?>" alt=""
+                            src="<?php echo e(asset('themes/volantijetcatering/assets/images/close.png')); ?>" alt="close icon"
                             style="height: 20px; width: 40px; padding: 0px 16px 0px 5px;display:none;" />
                         <div class="volanti_site_button pr-3">
                             
@@ -53,7 +53,7 @@
                                     <?php else: ?>
                                          <a href="<?php echo e(route('shop.customer.session.index')); ?>">
                                         <img src="<?php echo e(asset('/../themes/volantijetcatering/assets/images/profile-user.png')); ?>"
-                                            alt="" height="25px" />
+                                            alt="profile icon" height="25px" />
                                          </a>
                                     <?php endif; ?>
 
@@ -174,7 +174,7 @@
 
                         </div>
                         <!--  <div class="cart-wrapper">
-                                        <img src="<?php echo e(asset('themes/velocity/assets/images/shopping-bag-icon.png')); ?>" alt="" />
+                                        
                                     </div> -->
 
 
